@@ -19,11 +19,14 @@ import java.util.List;
  * Created by gyoho on 10/15/15.
  */
 public class YoutubeConnector {
+    private static final String TAG = "YouTubeConnector";
+
     private YouTube youtube;
     private YouTube.Search.List query;
 
     // Your developer key goes here
-    public static final String KEY = "AIzaSyB8ekdXqqwl2KA-Pcca7hqXdi33cbM69FU";
+    public static final String KEY = "AIzaSyA70jMKL9BcIAgniYafW_BAUoe_LJekCEE";
+    private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
 
     public YoutubeConnector(Context content) {
         youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
@@ -36,6 +39,7 @@ public class YoutubeConnector {
             query.setKey(KEY);
             query.setType("video");
             query.setFields("items(id/videoId,snippet/title,snippet/description,snippet/thumbnails/default/url)");
+            query.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
         } catch(IOException e){
             Log.d("YC", "Could not initialize: " + e);
         }
@@ -58,7 +62,7 @@ public class YoutubeConnector {
             }
             return items;
         }catch(IOException e){
-            Log.d("YC", "Could not search: "+ e);
+            Log.d(TAG, "Could not search: "+ e);
             return null;
         }
     }

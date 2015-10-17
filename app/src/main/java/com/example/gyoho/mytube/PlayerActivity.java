@@ -1,6 +1,10 @@
 package com.example.gyoho.mytube;
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -21,8 +25,31 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         setContentView(R.layout.activity_player);
 
+        // enable UP button
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         playerView = (YouTubePlayerView)findViewById(R.id.player_view);
         playerView.initialize(YoutubeConnector.KEY, this);
+    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu items for use in the action bar
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

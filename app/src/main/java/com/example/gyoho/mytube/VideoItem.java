@@ -4,11 +4,14 @@ package com.example.gyoho.mytube;
  * Created by gyoho on 10/15/15.
  */
 
+// Model for a custom ArrayAdapter
 public class VideoItem {
+    private String id;
     private String title;
     private String description;
     private String thumbnailURL;
-    private String id;
+//    private int viewCount;
+
 
     public String getId() {
         return id;
@@ -41,5 +44,13 @@ public class VideoItem {
     public void setThumbnailURL(String thumbnail) {
         this.thumbnailURL = thumbnail;
     }
+
+//    public int getViewCount() {
+//        return viewCount;
+//    }
+//
+//    public void incrementViewCount() {
+//        viewCount++;
+//    }
 
 }

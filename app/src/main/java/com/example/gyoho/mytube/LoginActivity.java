@@ -25,6 +25,24 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.google.android.gms.auth.GoogleAuthException;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.UserRecoverableAuthException;
+import com.google.android.gms.plus.Account;
+import com.google.android.gms.plus.Plus;
+
+import java.io.IOException;
+
 
 /**
  * Minimal activity demonstrating basic Google Sign-In.
@@ -60,6 +78,9 @@ public class LoginActivity extends AppCompatActivity implements
     /* Should we automatically resolve ConnectionResults when possible? */
     private boolean mShouldResolve = false;
     // [END resolution_variables]
+
+    private static final int REQ_SIGN_IN_REQUIRED = 55664;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,6 +254,10 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
+
+
+
+
     // [START on_connected]
     @Override
     public void onConnected(Bundle bundle) {
@@ -242,10 +267,45 @@ public class LoginActivity extends AppCompatActivity implements
         Log.d(TAG, "onConnected:" + bundle);
         mShouldResolve = false;
 
+        String mAccountName = Plus.AccountApi.getAccountName(mGoogleApiClient);
+        new RetrieveTokenTask().execute(mAccountName);
+
         // Show the signed-in UI
         showSignedInUI();
     }
     // [END on_connected]
+
+    private class RetrieveTokenTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String accountName = params[0];
+            String scopes = "oauth2:profile email";
+            String token = null;
+            try {
+                token = GoogleAuthUtil.getToken(getApplicationContext(), accountName, scopes);
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            } catch (UserRecoverableAuthException e) {
+                startActivityForResult(e.getIntent(), REQ_SIGN_IN_REQUIRED);
+            } catch (GoogleAuthException e) {
+                Log.e(TAG, e.getMessage());
+            }
+            return token;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            ((TextView) findViewById(R.id.status)).setText("Token Value: " + s);
+        }
+    }
+
+
+
+
+
+
 
     @Override
     public void onConnectionSuspended(int i) {
