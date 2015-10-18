@@ -1,5 +1,6 @@
 package com.example.gyoho.mytube;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +38,9 @@ public class FavoriteActivity extends Activity {
         setContentView(R.layout.activity_video);
 
         // enable UP button
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getActionBar();
+        actionBar.show();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         videosFound = (ListView)findViewById(R.id.videos_found);
         handler = new Handler();

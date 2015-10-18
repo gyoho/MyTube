@@ -1,6 +1,7 @@
 package com.example.gyoho.mytube;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -86,6 +87,10 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // enable UP button
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
 
         // Restore from saved instance state
         // [START restore_saved_instance_state]

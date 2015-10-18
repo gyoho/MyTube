@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/search"
         android:id="@+id/search_input"
+        android:textSize="20sp"
         android:singleLine="true" />
 
     <ListView

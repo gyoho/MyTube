@@ -28,7 +28,7 @@
 
 
     <!--nutsplus.com-->
-    <string name="search">Search</string>
+    <string name="search">Search by Key Words</string>
     <string name="failed">Failed to initialize Youtube Player</string>
     
     <string name="action_search">Search</string>

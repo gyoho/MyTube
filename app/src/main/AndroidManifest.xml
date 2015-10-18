@@ -37,8 +37,5 @@
         <activity android:name=".PlayerActivity"
             android:screenOrientation="landscape"
             android:parentActivityName="com.example.gyoho.mytube.SearchActivity" />
-
-        <activity android:name=".FavoriteActivity"
-            android:screenOrientation="portrait" />
     </application>
 </manifest>

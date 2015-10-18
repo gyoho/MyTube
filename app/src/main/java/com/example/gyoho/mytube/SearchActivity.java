@@ -1,9 +1,11 @@
 package com.example.gyoho.mytube;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +46,10 @@ public class SearchActivity extends Activity {
 
         setContentView(R.layout.activity_video);
 
+        // enable UP button
+        ActionBar actionBar = getActionBar();
+        actionBar.show();
+
         searchInput = (EditText)findViewById(R.id.search_input);
         videosFound = (ListView)findViewById(R.id.videos_found);
 
@@ -61,6 +67,14 @@ public class SearchActivity extends Activity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     // Use thread to handle the request
