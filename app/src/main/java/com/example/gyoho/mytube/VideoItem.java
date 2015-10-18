@@ -8,9 +8,10 @@ package com.example.gyoho.mytube;
 public class VideoItem {
     private String id;
     private String title;
+    private String publishedDate;
     private String description;
     private String thumbnailURL;
-//    private int viewCount;
+    private int viewCount;
 
 
     public String getId() {
@@ -29,6 +30,14 @@ public class VideoItem {
         this.title = title;
     }
 
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -45,12 +54,12 @@ public class VideoItem {
         this.thumbnailURL = thumbnail;
     }
 
-//    public int getViewCount() {
-//        return viewCount;
-//    }
-//
-//    public void incrementViewCount() {
-//        viewCount++;
-//    }
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void incrementViewCount() {
+        viewCount++;
+    }
 
 }

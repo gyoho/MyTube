@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:MyTube="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,9 +8,10 @@
         android:icon="@mipmap/ic_action_search"
         android:title="@string/action_search"
         MyTube:showAsAction="ifRoom"/>
-    <item android:id="@+id/action_compose"
+
+    <item android:id="@+id/action_discard"
         android:icon="@mipmap/ic_action_discard"
         android:title="@string/action_remove"
-        MyTube:showAsAction="ifRoom" />
+        MyTube:showAsAction="always" />
 
 </menu>
