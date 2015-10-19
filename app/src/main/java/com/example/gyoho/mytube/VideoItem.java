@@ -12,6 +12,7 @@ public class VideoItem {
     private String description;
     private String thumbnailURL;
     private int viewCount;
+    private boolean isStarred;
 
 
     public String getId() {
@@ -60,6 +61,14 @@ public class VideoItem {
 
     public void incrementViewCount() {
         viewCount++;
+    }
+
+    public boolean isStarred() {
+        return isStarred;
+    }
+
+    public void setStarred() {
+        isStarred = true;
     }
 
 }

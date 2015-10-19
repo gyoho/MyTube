@@ -30,7 +30,8 @@ public class YoutubeConnector {
     private YouTube.Search.List query;
 
     // Your developer key goes here
-    protected static final String KEY = "AIzaSyA70jMKL9BcIAgniYafW_BAUoe_LJekCEE";
+    protected static final String KEY1 = "AIzaSyAWTGqRmW_8wiRYTndIrtTgPucEhDGkF84";
+    protected static final String KEY2 = "AIzaSyC2tY9H2NbzrYz-cT1W0JJzeh0fkWTTWDM";
     private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
 
     public YoutubeConnector(Context content) {
@@ -41,7 +42,7 @@ public class YoutubeConnector {
 
         try{
             query = youtube.search().list("id,snippet");
-            query.setKey(KEY);
+            query.setKey(KEY1);
             query.setType("video");
             query.setFields("items(id/videoId,snippet/title,snippet/publishedAt,snippet/description,snippet/thumbnails/default/url)");
             query.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
@@ -83,11 +84,14 @@ public class YoutubeConnector {
         Joiner stringJoiner = Joiner.on(',');
         String videoId = stringJoiner.join(favoriteVideoIds);
 
+        Log.d(TAG, "String video ID: " + videoId);
+
         // Call the YouTube Data API's youtube.videos.list method to
         // retrieve the resources that represent the specified videos
         YouTube.Videos.List listVideosRequest = null;
         try {
-            listVideosRequest = youtube.videos().list("items(id/videoId,snippet/title,snippet/description,snippet/thumbnails/default/url)").setId(videoId);
+            listVideosRequest = youtube.videos().list("snippet, recordingDetails").setId(videoId);
+            listVideosRequest.setKey(KEY2);
             VideoListResponse listResponse = listVideosRequest.execute();
 
             List<Video> videoList = listResponse.getItems();

@@ -4,21 +4,17 @@
     android:layout_height="match_parent"
     android:padding="16dp" >
 
-    <!--TODO: context action bar-->
-
-
-    <!--TODO: checkbox-->
     <CheckBox
-        android:id="@+id/star_icon"
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_gravity="center" />
+        android:paddingTop="110dp"/>
 
     <ImageView android:id="@+id/video_thumbnail"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/checkbox"
         android:layout_alignParentTop="true"
         android:layout_marginRight="20dp" />
 
@@ -31,10 +27,19 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <TextView android:id="@+id/video_view_count"
+    <TextView android:id="@+id/video_publish_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/video_thumbnail"
+        android:layout_below="@id/video_title"
+        android:layout_alignParentBottom="true"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView android:id="@+id/video_view_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_below="@id/video_title"
         android:layout_alignParentBottom="true"
         android:textSize="20sp"

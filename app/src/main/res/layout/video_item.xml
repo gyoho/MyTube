@@ -31,14 +31,6 @@
         android:textSize="15sp"
         android:textStyle="bold" />
 
-    <TextView android:id="@+id/video_view_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/star_icon"
-        android:paddingRight="15dip"
-        android:layout_alignParentBottom="true"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
     <CheckBox
         android:id="@+id/star_icon"
@@ -48,5 +40,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         style="?android:attr/starStyle" />
+
+
+    <TextView android:id="@+id/video_view_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/star_icon"
+        android:paddingRight="15dip"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

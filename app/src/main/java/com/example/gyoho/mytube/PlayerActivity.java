@@ -26,7 +26,7 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
         setContentView(R.layout.activity_player);
 
         playerView = (YouTubePlayerView)findViewById(R.id.player_view);
-        playerView.initialize(YoutubeConnector.KEY, this);
+        playerView.initialize(YoutubeConnector.KEY1, this);
     }
 
     @Override

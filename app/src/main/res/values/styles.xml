@@ -1,8 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.DeviceDefault">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat">
+        <!--<item name="android:actionBarTabStyle">@style/ActionBarTabStyle</item>-->
+    </style>
+
+    <style name="ActionBarTabStyle" parent="@style/Widget.AppCompat.Light.ActionBar.TabView">
+        <item name="android:minWidth">80dip</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
     </style>
 
     <!-- Dark Buttons -->
