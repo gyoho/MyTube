@@ -9,7 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -35,18 +38,16 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
-                Log.d(TAG, "Tab clicked");
+//                Log.d(TAG, "Tab clicked");
                 mFragAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
     }
 
@@ -56,5 +57,25 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_discard) {
+            removeFromFavoriteList();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void removeFromFavoriteList() {
+        if(!FavoriteFragment.removalVideoIds.isEmpty()) {
+            for (String videoId : FavoriteFragment.removalVideoIds) {
+                SearchFragment.favoriteVideoIds.remove(videoId);
+            }
+            FavoriteFragment.removalVideoIds.clear();
+        }
+        mFragAdapter.notifyDataSetChanged();
     }
 }

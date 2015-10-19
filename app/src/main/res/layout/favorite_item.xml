@@ -8,8 +8,8 @@
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:paddingTop="110dp"/>
+        android:paddingLeft="10dp"
+        android:paddingTop="110dp" />
 
     <ImageView android:id="@+id/video_thumbnail"
         android:layout_width="128dp"
@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/video_thumbnail"
+        android:layout_alignParentRight="true"
         android:layout_below="@id/video_title"
-        android:layout_alignParentBottom="true"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -40,8 +40,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/video_title"
+        android:layout_below="@id/video_publish_date"
         android:layout_alignParentBottom="true"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <TextView android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/watch_count_comment"
+        android:layout_below="@id/video_publish_date"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/video_view_count"
         android:textSize="20sp"
         android:textStyle="bold" />
 

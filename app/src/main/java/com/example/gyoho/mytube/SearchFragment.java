@@ -34,7 +34,7 @@ public class SearchFragment extends Fragment {
 
     // make handler as a global variable
     private Handler handler;
-    private List<VideoItem> searchResults;
+    static List<VideoItem> searchResults;
 
     // store unique video ID
     static List<String> favoriteVideoIds = new ArrayList<String>();
@@ -136,10 +136,19 @@ public class SearchFragment extends Fragment {
                 starred.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        searchResult.setStarred();
-                        favoriteVideoIds.add(searchResult.getId());
+                        boolean checked = ((CheckBox) v).isChecked();
+                        if (checked) {
+                            searchResult.setStarred(true);
+                            favoriteVideoIds.add(searchResult.getId());
+                        } else {
+                            searchResult.setStarred(false);
+                            if (favoriteVideoIds.contains(searchResult.getId())) {
+                                favoriteVideoIds.remove(searchResult.getId());
+                            }
+                        }
                     }
                 });
+
 //                Log.d(TAG, String.valueOf(favoriteVideoIds.size()));
 
                 // set the thumbnail to respond to start video
@@ -147,9 +156,9 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                        intent.putExtra("VIDEO_ID", searchResults.get(position).getId());
+                        intent.putExtra("VIDEO_ID", searchResult.getId());
                         // increment the view count
-                        searchResults.get(position).incrementViewCount();
+                        searchResult.incrementViewCount();
 
                         startActivity(intent);
                     }

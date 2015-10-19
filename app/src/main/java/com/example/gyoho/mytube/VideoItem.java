@@ -13,6 +13,7 @@ public class VideoItem {
     private String thumbnailURL;
     private int viewCount;
     private boolean isStarred;
+    private boolean isChecked;
 
 
     public String getId() {
@@ -59,6 +60,10 @@ public class VideoItem {
         return viewCount;
     }
 
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
+    }
+
     public void incrementViewCount() {
         viewCount++;
     }
@@ -67,8 +72,16 @@ public class VideoItem {
         return isStarred;
     }
 
-    public void setStarred() {
-        isStarred = true;
+    public void setStarred(boolean b) {
+        isStarred = b;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean b) {
+        isChecked = b;
     }
 
 }

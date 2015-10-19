@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +18,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +34,9 @@ public class FavoriteFragment extends Fragment implements UpdateableFragment{
 
     private Handler handler;
     private List<VideoItem> searchResults;
+
+    // store unique video ID
+    static List<String> removalVideoIds = new ArrayList<String>();
 
     private int mPage;
 
@@ -93,6 +101,7 @@ public class FavoriteFragment extends Fragment implements UpdateableFragment{
                 }
 
                 // associate the layout items attributes with the array data
+                CheckBox checkBox = (CheckBox)convertView.findViewById(R.id.checkbox);
                 ImageView thumbnail = (ImageView)convertView.findViewById(R.id.video_thumbnail);
                 TextView title = (TextView)convertView.findViewById(R.id.video_title);
                 TextView publishedDate = (TextView)convertView.findViewById(R.id.video_publish_date);
@@ -106,17 +115,50 @@ public class FavoriteFragment extends Fragment implements UpdateableFragment{
                 title.setText(searchResult.getTitle());
                 publishedDate.setText(searchResult.getPublishedDate());
                 viewCount.setText(String.valueOf(searchResult.getViewCount()));
+                // the checkbox will be repeated due to View Recycling
+                checkBox.setChecked(false);
+
+                // force it to be unchecked by default and only check it if needed
+                if(searchResult.isChecked()) {
+                    checkBox.setChecked(true);
+                }
 
                 // set the thumbnail to respond to start video
                 thumbnail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                        intent.putExtra("VIDEO_ID", searchResults.get(position).getId());
+                        intent.putExtra("VIDEO_ID", searchResult.getId());
                         // increment the view count
-                        searchResults.get(position).incrementViewCount();
-
+                        searchResult.incrementViewCount();
                         startActivity(intent);
+                    }
+                });
+
+                checkBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean checked = ((CheckBox) v).isChecked();
+                        if(checked) {
+                            removalVideoIds.add(searchResult.getId());
+                            searchResult.setChecked(true);
+                            for(VideoItem item: SearchFragment.searchResults) {
+                                if(item.getId().equals(searchResult.getId())) {
+                                    item.setStarred(false);
+                                }
+                            }
+                        } else {
+                            searchResult.setChecked(false);
+                            for(VideoItem item: SearchFragment.searchResults) {
+                                if(item.getId().equals(searchResult.getId())) {
+                                    item.setStarred(true);
+                                }
+                            }
+                            if(removalVideoIds.contains(searchResult.getId())){
+                                removalVideoIds.remove(searchResult.getId());
+                            }
+                        }
+                        Log.d(TAG, "Removal video: " + removalVideoIds);
                     }
                 });
 
@@ -124,7 +166,6 @@ public class FavoriteFragment extends Fragment implements UpdateableFragment{
                 return convertView;
             }
         };
-
         videosFound.setAdapter(adapter);
     }
 }

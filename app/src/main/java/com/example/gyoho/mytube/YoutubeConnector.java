@@ -84,7 +84,7 @@ public class YoutubeConnector {
         Joiner stringJoiner = Joiner.on(',');
         String videoId = stringJoiner.join(favoriteVideoIds);
 
-        Log.d(TAG, "String video ID: " + videoId);
+//        Log.d(TAG, "String video ID: " + videoId);
 
         // Call the YouTube Data API's youtube.videos.list method to
         // retrieve the resources that represent the specified videos
@@ -111,6 +111,10 @@ public class YoutubeConnector {
                 item.setThumbnailURL(video.getSnippet().getThumbnails().getDefault().getUrl());
                 // same as id in search method
                 item.setId(video.getId());
+
+//                item.setViewCount(video.getStatistics().getViewCount().intValue());
+//                Log.d(TAG, "view count: " + video.getStatistics().getViewCount().intValue());
+
                 items.add(item);
             }
             return items;
